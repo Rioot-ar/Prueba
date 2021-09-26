@@ -8,7 +8,7 @@ let fragmento=document.createDocumentFragment();
 
 const obtenerGrupos=(cantGrupos,duracionDeIntervalos,iniPrimerGrupo)=>{
     let filaGrupos = document.createElement("TR");
-    let intInicial = duracionDeIntervalos;
+    let intInicial = iniPrimerGrupo;
     for (let i = 0; i < cantGrupos; i++) {
         grupos.push([]);
         let grupoText = `<td class="grupo ${i+1}"> Grupo ${i+1}</td>`;
