@@ -1,10 +1,7 @@
-let gruposInput = Number(prompt("Cantidad de Grupos"));
-let intervaloInput = Number(prompt("Intervalo entre grupos"));
-let inicioInput = Number(prompt("Inicio del primer grupo"));
-
 let contenido=document.querySelector(".actuales");
-let tabla=document.querySelector(".horarios");
 let fragmento=document.createDocumentFragment();
+
+
 
 const obtenerGrupos=(cantGrupos,duracionDeIntervalos,iniPrimerGrupo)=>{
     let filaGrupos = document.createElement("TR");
@@ -21,13 +18,12 @@ const obtenerGrupos=(cantGrupos,duracionDeIntervalos,iniPrimerGrupo)=>{
         let filaDeHorarios = document.createElement("TR");
         for (let i = 0; i < cantGrupos ; i++){
             grupos[i].push([intInicial,(intInicial+duracionDeIntervalos)%1440]);
-            intInicial= grupos[i][j][1];
+            intInicial = grupos[i][j][1];
             let textoFila= `<td>${Math.floor(grupos[i][j][0]/60)}:${grupos[i][j][0]%60}</td>`;
             filaDeHorarios.innerHTML+=textoFila;
         }
         fragmento.appendChild(filaDeHorarios);
     }
-    grupos[cantGrupos-1][Math.floor(1440/(cantGrupos*duracionDeIntervalos)-1)][1]=iniPrimerGrupo;
 }
 
 const obtenerGrupoActual = (cantGrupos,duracionDeIntervalos,horariosMinutosPVU)=>{
@@ -44,21 +40,39 @@ const obtenerGrupoActual = (cantGrupos,duracionDeIntervalos,horariosMinutosPVU)=
     }
 }
 
+
+
 let horarioPVU=new Date();
 let grupoActual;
 let minFaltantes;
 
-let cantidadGrupos = gruposInput;
-let intervaloGrupos = intervaloInput;
-let inicioPrimerGrupo = inicioInput;
-
-const grupos = [];
+let grupos=[];
 
 horariosMinutosPVU = horarioPVU.getMinutes()+horarioPVU.getHours()*60;
 
-obtenerGrupos(cantidadGrupos,intervaloGrupos,inicioPrimerGrupo);
-obtenerGrupoActual(cantidadGrupos,intervaloGrupos,horariosMinutosPVU);
 
-tabla.appendChild(fragmento);
-contenido.innerHTML = `Grupo Actual: ${grupoActual} <br>
-Siguiente Grupo En: ${minFaltantes} Minutos`;
+let cantidadGrupos;
+let intervaloGrupos;
+let inicioPrimerGrupo;
+function Obtener(){
+    cantidadGrupos = Number(document.getElementById("gruposInput").value);
+    intervaloGrupos = Number(document.getElementById("intervaloInput").value);
+    inicioPrimerGrupo = Number(document.getElementById("inicioInput").value);
+}
+
+function Actualizar(){ 
+    fragmento=document.createDocumentFragment();
+    let tablaNueva=document.createElement("table");
+    tablaNueva.setAttribute("id","horarios");
+    var tablaVieja=document.getElementById("horarios");
+    obtenerGrupos(cantidadGrupos,intervaloGrupos,inicioPrimerGrupo);
+    obtenerGrupoActual(cantidadGrupos,intervaloGrupos,horariosMinutosPVU);
+    var tabla=tablaVieja.parentNode;
+
+    tablaNueva.appendChild(fragmento);
+    tablaVieja=tabla.replaceChild(tablaNueva,tablaVieja);
+
+    contenido.innerHTML = `Grupo Actual: ${grupoActual} <br>
+    Siguiente Grupo En: ${minFaltantes} Minutos`;
+    grupos = [];
+}

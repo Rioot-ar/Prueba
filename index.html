@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-     <h1>Horarios</h1>
+
     <section class="contenido">
-        <table class="horarios"></table>
+        <table id="horarios"></table>
         <article class="actuales"></article>
     </section>
+    <form>
+        <input type="number" id="gruposInput" placeholder="Cantidad de Grupos" >
+        <input type="number" id="intervaloInput" placeholder="Intervalo Entre Grupos">
+        <input type="number" id="inicioInput" placeholder="Primer Grupo">
+        <button type="button" onclick="Obtener()">Obtener</button>
+    </form>
+    <button type="button" onclick="Actualizar()">Actualizar</button>
+    
+ 
+
     <script src="code.js"></script>
 </body>
 </html>
