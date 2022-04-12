@@ -102,5 +102,4 @@ function actualizarDatos(cantidadGrupos,intervaloGrupos,inicioPrimerGrupo){
     let contenido=document.querySelector(".actuales");
     contenido.innerHTML = `Grupo Actual: ${grupoActual} <br>
     Siguiente Grupo En: ${minFaltantes} Minutos`;
-    grupos = [];
 }
