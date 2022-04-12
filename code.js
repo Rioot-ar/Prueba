@@ -1,6 +1,6 @@
 
 let fechaActual=new Date();
-let horariosMinutosPVU = fechaActual.getMinutes()+fechaActual.getHours()*60;
+let horaAMinutos = fechaActual.getMinutes()+fechaActual.getHours()*60;
 
 
 const obtenerIntervalos = (cantGrupos,duracionDeIntervalos,iniPrimerGrupo)=>{
@@ -34,12 +34,12 @@ const obtenerGrupos=(cantGrupos)=>{
 
 }
 
-const obtenerGrupoActual = (cantGrupos,duracionDeIntervalos,horariosMinutosPVU)=>{
+const obtenerGrupoActual = (cantGrupos,duracionDeIntervalos,horaAMinutos)=>{
     for (let j = 0; j < Math.round(1440/(cantGrupos*duracionDeIntervalos)); j++) {
         for (let i = 0; i < cantGrupos; i++) {
-           if(grupos[i][j][0] < horariosMinutosPVU && grupos[i][j][1] >= horariosMinutosPVU){
+           if(grupos[i][j][0] < horaAMinutos && grupos[i][j][1] >= horaAMinutos){
                grupoActual=i+1;
-               minFaltantes=grupos[i][j][1]-horariosMinutosPVU;
+               minFaltantes=grupos[i][j][1]-horaAMinutos;
                return;
            }
             
@@ -95,10 +95,10 @@ function actualizarDatos(cantidadGrupos,intervaloGrupos,inicioPrimerGrupo){
     tablaNueva.setAttribute("id","horarios");
     tablaNueva.appendChild(fragmento);
     tablaActual=tablaPadre.replaceChild(tablaNueva,tablaActual);
-
+    
     grupoActual = 0;
     minFaltantes = 0;
-    obtenerGrupoActual(cantidadGrupos,intervaloGrupos,horariosMinutosPVU);
+    obtenerGrupoActual(cantidadGrupos,intervaloGrupos,horaAMinutos);
     let contenido=document.querySelector(".actuales");
     contenido.innerHTML = `Grupo Actual: ${grupoActual} <br>
     Siguiente Grupo En: ${minFaltantes} Minutos`;
