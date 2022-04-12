@@ -74,9 +74,9 @@ function obtenerDatos(){
         console.error("La cantidad de grupos e intervalos no te pueden dividir en 24 horas");
         mostrarError();
         return;
+    }else{
+        actualizarDatos(cantidadGrupos,intervaloGrupos,inicioPrimerGrupo);
     }
-    actualizarDatos(cantidadGrupos,intervaloGrupos,inicioPrimerGrupo);
-
 
 }
 
